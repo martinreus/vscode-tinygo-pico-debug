@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug on Pico",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "request": "launch",
+      "runToEntryPoint": "main.main",
+      "executable": "${workspaceRoot}/build/out.elf",
+      "configFiles": [
+        "${env:HOME}/pico/openocd/tcl/interface/cmsis-dap.cfg",
+        "${env:HOME}/pico/openocd/tcl/target/rp2040.cfg"
+      ],
+      "openOCDLaunchCommands": ["adapter speed 5000"],
+      "preLaunchTask": "build pico",
+      "showDevDebugOutput": "raw",
+      "gdbPath": "/usr/bin/gdb-multiarch",
+      // this had to be specified on linux otherwise the error dumps from OpenOCD did not work properly
+      "objdumpPath": "/usr/bin/objdump",
+      "svdFile": "${workspaceRoot}/svd/rp2040.svd"
+    }
+  ]
+}
